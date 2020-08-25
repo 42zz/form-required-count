@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>フォーム必須項目カウンター</title>
+		<style>
+            * {
+                box-sizing: border-box;
+            }
+			body {
+				background-color: #eee;
+			}
+			.wrapper {
+                position: relative;
+				width: 100%;
+				max-width: 600px;
+				margin: 100px auto;
+			}
+            .nokori {
+                position: fixed;
+                background-color: #fff;
+                border: #333;
+                top: 30px;
+                right: 0;
+                padding: 15px 30px;
+            }
+			dt {
+				width: 20%;
+                font-size: 14px;
+                font-weight: 400;
+                margin-left: 5px;
+                margin-bottom: 5px;
+                display: block;
+			}
+			dd {
+                margin-left: 0;
+				width: 100%;
+                margin-bottom: 30px;
+			}
+            .form-radio-wrapper {
+                background-color: #fff;
+                padding: 15px 15px;
+                border-radius: 4px;
+            }
+			.form-control {
+				width: 100%;
+                border-radius: 4px;
+                padding: 15px 20px;
+                border: 0;
+                outline: 0;
+			}
+            button {
+                display: block;
+                width: 100%;
+                background-color: #ccc;
+                border: 0;
+                outline: 0;
+                color: #212121;
+                border-radius: 4px;
+                padding: 15px;
+                cursor: pointer;
+                transition: all ease-in-out .6s;
+            }
+            button:hover {
+                background-color: #000;
+                color: #fff;
+            }
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+            <div class="nokori">
+                <h3>残り必須項目数：<span data-remaining-nokori>0</span>件</h3>
+                <h3>全体必須項目数：<span data-remaining-total>0</span>件</h3>
+            </div>
+
+			<form>
+				<dl>
+					<dt>お名前</dt>
+					<dd>
+						<input class="form-control" type="text" name="text" placeholder="お名前" required />
+					</dd>
+				</dl>
+				<dl>
+					<dt>性別</dt>
+					<dd class="form-radio-wrapper">
+						<input class="form-radio" type="radio" name="sex" value="male" required/>男
+						<input class="form-radio" type="radio" name="sex" value="female" />女
+					</dd>
+				</dl>
+				<dl>
+					<dt>電話番号</dt>
+					<dd>
+						<input class="form-control" type="text" name="text" placeholder="電話番号" required/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>住所</dt>
+					<dd>
+						<input class="form-control" type="text" name="text" placeholder="住所" required/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>選択項目</dt>
+					<dd>
+						<select class="form-control" name="" id="" required>
+							<option value="">選択してください</option>
+							<option value="1">選択項目1</option>
+							<option value="2">選択項目2</option>
+							<option value="2">選択項目3</option>
+							<option value="2">選択項目4</option>
+							<option value="2">選択項目5</option>
+						</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt>お問い合わせ内容</dt>
+					<dd>
+						<textarea class="form-control" name="" id="" cols="30" rows="10" required></textarea>
+					</dd>
+                </dl>
+                <button type="submit">送信する</button>
+			</form>
+        </div>
+        
+        <script src="main.js"></script>
+	</body>
+</html>

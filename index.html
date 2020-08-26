@@ -71,40 +71,40 @@
 	<body>
 		<div class="wrapper">
             <div class="nokori">
-                <h3>残り必須項目数：<span data-remaining-nokori>0</span>件</h3>
-                <h3>全体必須項目数：<span data-remaining-total>0</span>件</h3>
+                <h3>残り必須項目数：<span id="nokori">0</span>件</h3>
+                <h3>全体必須項目数：<span id="total">0</span>件</h3>
             </div>
 
-			<form>
+			<form id="remaining-target">
 				<dl>
 					<dt>お名前</dt>
 					<dd>
-						<input class="form-control" type="text" name="text" placeholder="お名前" required />
+						<input class="form-control" type="text" name="your-name" placeholder="お名前" required />
 					</dd>
 				</dl>
 				<dl>
 					<dt>性別</dt>
 					<dd class="form-radio-wrapper">
-						<input class="form-radio" type="radio" name="sex" value="male" required/>男
-						<input class="form-radio" type="radio" name="sex" value="female" />女
+						<input class="form-radio" type="radio" name="your-gender" value="male" required/>男
+						<input class="form-radio" type="radio" name="your-gender" value="female" />女
 					</dd>
 				</dl>
 				<dl>
 					<dt>電話番号</dt>
 					<dd>
-						<input class="form-control" type="text" name="text" placeholder="電話番号" required/>
+						<input class="form-control" type="text" name="your-phone" placeholder="電話番号" required/>
 					</dd>
 				</dl>
 				<dl>
 					<dt>住所</dt>
 					<dd>
-						<input class="form-control" type="text" name="text" placeholder="住所" required/>
+						<input class="form-control" type="text" name="your-address" placeholder="住所" required/>
 					</dd>
 				</dl>
 				<dl>
 					<dt>選択項目</dt>
 					<dd>
-						<select class="form-control" name="" id="" required>
+						<select class="form-control" name="your-select" id="" required>
 							<option value="">選択してください</option>
 							<option value="1">選択項目1</option>
 							<option value="2">選択項目2</option>
@@ -117,7 +117,7 @@
 				<dl>
 					<dt>お問い合わせ内容</dt>
 					<dd>
-						<textarea class="form-control" name="" id="" cols="30" rows="10" required></textarea>
+						<textarea class="form-control" name="your-message" id="" cols="30" rows="10" required></textarea>
 					</dd>
                 </dl>
                 <button type="submit">送信する</button>

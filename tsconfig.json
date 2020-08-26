@@ -1,0 +1,20 @@
+{
+	"compileOnSave": true, // add
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"noEmitOnError": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"downlevelIteration": true, // add -> Provide full support for iterables in for..of, spread and destructuring when targeting ES5 or ES3.
+		"declaration": true, // add -> Generates corresponding .d.ts file
+		"declarationMap": true, // add -> Generates a sourcemap for each corresponding ‘.d.ts’ file.
+		"target": "es5",
+		"lib": [ "es2015", "es2015.promise", "dom", "dom.iterable" ], // add
+		"module": "es2015", // add -> Specify module code generation: "None", "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015" or "ESNext".
+	},
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
+	"include": [ "*" ] // add
+}

@@ -16,5 +16,5 @@
 		"node_modules",
 		"dist"
 	],
-	"include": [ "*" ] // add
+	"include": [ "dist/main.js", "dist/main.bundle.js", "src/main.ts" ] // add
 }

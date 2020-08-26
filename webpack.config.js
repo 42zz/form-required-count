@@ -7,10 +7,10 @@ module.exports = {
     // entry points -> ts ファイルを指定（複数可）
     // https://webpack.js.org/concepts/entry-points/#multi-page-application
     entry: {
-        "main": path.resolve(__dirname, "main.ts")
+        "main": path.resolve(__dirname, "src/main.ts")
     },
     output: {
-        path: path.resolve(__dirname),
+        path: path.resolve(__dirname, "dist/"),
         filename: "[name].bundle.js"
     },
     resolve: {

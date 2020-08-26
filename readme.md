@@ -3,11 +3,24 @@
 
 
 ## 使い方
+```
+<p>残り必須項目数：<span id="remaining"></span>件</p>
+<p>全体必須項目数：<span id="total"></span>件</p>
+<form id="target">
+<input type="text" name="your-name" required>
+</form>
+```
 
 ```
-const formInit = new reqForm(
-    'フォーム要素のID', '必須項目数のID', '残り必須項目数のID'
-    );
+<script src="dist/main.bundle.js"></script>
+<script src="dist/main.js"></script>
+<script>
+    const formInit = new reqForm(
+        'フォーム要素のID',
+        '必須項目数のID',
+        '残り必須項目数のID'
+        );
+</script>
 ```
 
 * フォーム内のrequired属性の数をカウントする
@@ -18,3 +31,4 @@ const formInit = new reqForm(
 
 ## 注意
 バリデーションは行っていない。あくまで簡易的なフォーム内の必須項目数カウンタ
+Formタグ内のname属性で要素のカウントを行っているのでname属性は必ず指定する。

@@ -26,13 +26,19 @@
                 padding: 15px 30px;
             }
 			dt {
-				width: 20%;
+                position: relative;
+				width: 100%;
                 font-size: 14px;
                 font-weight: 400;
                 margin-left: 5px;
                 margin-bottom: 5px;
-                display: block;
+                display: inline-block;
 			}
+            .required::after {
+                content: '*';
+                margin-left: 5px;
+                color: #ee0000;
+            }
 			dd {
                 margin-left: 0;
 				width: 100%;
@@ -66,6 +72,12 @@
                 background-color: #000;
                 color: #fff;
             }
+            button:disabled {
+                background-color: #ccc;
+                color: #999;
+                cursor:not-allowed
+            }
+
 		</style>
 	</head>
 	<body>
@@ -77,32 +89,32 @@
 
 			<form id="target">
 				<dl>
-					<dt>お名前</dt>
+					<dt class="required">お名前</dt>
 					<dd>
 						<input class="form-control" type="text" name="your-name" placeholder="お名前" required />
 					</dd>
 				</dl>
 				<dl>
-					<dt>性別</dt>
+					<dt class="required">性別</dt>
 					<dd class="form-radio-wrapper">
 						<input class="form-radio" type="radio" name="your-gender" value="male" required/>男
 						<input class="form-radio" type="radio" name="your-gender" value="female" />女
 					</dd>
 				</dl>
 				<dl>
-					<dt>電話番号</dt>
+					<dt class="required">電話番号</dt>
 					<dd>
 						<input class="form-control" type="text" name="your-phone" placeholder="電話番号" required/>
 					</dd>
 				</dl>
 				<dl>
-					<dt>住所</dt>
+					<dt class="required">住所</dt>
 					<dd>
 						<input class="form-control" type="text" name="your-address" placeholder="住所" required/>
 					</dd>
 				</dl>
 				<dl>
-					<dt>選択項目</dt>
+					<dt class="required">選択項目</dt>
 					<dd>
 						<select class="form-control" name="your-select" id="" required>
 							<option value="">選択してください</option>
@@ -123,7 +135,7 @@
 					</dd>
 				</dl>
 				<dl>
-					<dt>お問い合わせ内容</dt>
+					<dt class="required">お問い合わせ内容</dt>
 					<dd>
 						<textarea class="form-control" name="your-message" id="" cols="30" rows="10" required></textarea>
 					</dd>

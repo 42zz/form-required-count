@@ -15,9 +15,17 @@ var reqForm = /** @class */ (function () {
     reqForm.prototype.setTargetNames = function (target) {
         var elements = target.elements;
         for (var i = 0; i < target.elements.length; i++) {
-            if (this.targetNames.indexOf(elements[i].getAttribute('name')) === -1 && elements[i].getAttribute('name') && elements[i].getAttribute('type') !== 'submit') {
-                this.targetNames.push(elements[i].getAttribute('name'));
+            var attrName = elements[i].getAttribute('name');
+            if (this.targetNames.indexOf(attrName) === -1 &&
+                elements[i].getAttribute('name') &&
+                elements[i].getAttribute('type') !== 'submit' &&
+                elements[i].getAttribute('required') === '') {
+                this.targetNames.push(attrName);
                 this.total++;
+            }
+            if (target.elements[i].getAttribute('type') === 'submit') {
+                this.submit = target.elements[i];
+                this.submit.setAttribute('disabled', 'true');
             }
         }
         return;
@@ -28,7 +36,8 @@ var reqForm = /** @class */ (function () {
         for (var i = 0; i < this.targetNames.length; i++) {
             elements.push(document.getElementsByName(this.targetNames[i])[0]);
         }
-        document.addEventListener('change', function (_) {
+        document.addEventListener('change', function (e) {
+            e.preventDefault();
             // const target: HTMLInputElement = e.target as HTMLInputElement;
             var remainingNames = _this.targetNames.filter(function (name) {
                 var targetInput = document.getElementsByName(name);
@@ -48,6 +57,9 @@ var reqForm = /** @class */ (function () {
             });
             _this.remaining = _this.total - remainingNames.length;
             _this.writeInnerHtml(_this.remainingEl, _this.remaining.toString());
+            if (_this.remaining === 0) {
+                _this.submit.removeAttribute('disabled');
+            }
         });
         return;
     };

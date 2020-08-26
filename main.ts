@@ -1,9 +1,10 @@
 interface ArrayConstructor {
-    from(arrayLike: any, mapFn?, thisArg?): Array<any>;
+	from(arrayLike: any, mapFn?, thisArg?): Array<any>;
 }
 
 class reqForm {
-	private target: HTMLFormElement;
+    private target: HTMLFormElement;
+    private submit: HTMLElement;
 	private targetNames: string[] = [];
 	private total: number = 0;
 	private totalEl: HTMLElement;
@@ -26,10 +27,20 @@ class reqForm {
 	private setTargetNames(target: HTMLFormElement): void {
 		const elements: HTMLFormControlsCollection = target.elements as HTMLFormControlsCollection;
 		for (let i = 0; i < target.elements.length; i++) {
-			if (this.targetNames.indexOf(elements[i].getAttribute('name')) === -1 && elements[i].getAttribute('name') && elements[i].getAttribute('type') !== 'submit') {
-				this.targetNames.push(elements[i].getAttribute('name'));
+            const attrName: string = elements[i].getAttribute('name') as string;
+			if (
+				this.targetNames.indexOf(attrName) === -1 &&
+				elements[i].getAttribute('name') &&
+                elements[i].getAttribute('type') !== 'submit' &&
+                elements[i].getAttribute('required') === ''
+			) {
+				this.targetNames.push(attrName);
 				this.total++;
-			}
+            }
+            if(target.elements[i].getAttribute('type') === 'submit') {
+                this.submit = target.elements[i] as HTMLElement
+                this.submit.setAttribute('disabled', 'true');
+            }
 		}
 		return;
 	}
@@ -40,25 +51,30 @@ class reqForm {
 			elements.push(document.getElementsByName(this.targetNames[i])[0]);
 		}
 
-		document.addEventListener('change', (_) => {
-            // const target: HTMLInputElement = e.target as HTMLInputElement;
+		document.addEventListener('change', (e) => {
+            e.preventDefault();
+			// const target: HTMLInputElement = e.target as HTMLInputElement;
 			const remainingNames = this.targetNames.filter((name) => {
-                const targetInput: NodeList = document.getElementsByName(name);
+				const targetInput: NodeList = document.getElementsByName(name);
 				if ((targetInput[0] as HTMLInputElement).getAttribute('type') === 'radio') {
-                    const radio: HTMLInputElement[] = Array.from(document.querySelectorAll(`input[name=${name}]`));
-    
-                    for(let item of radio) {
-                        if(item.checked) {
-                            return item.name;
-                        }
-                    }
+					const radio: HTMLInputElement[] = Array.from(document.querySelectorAll(`input[name=${name}]`));
+
+					for (let item of radio) {
+						if (item.checked) {
+							return item.name;
+						}
+					}
 				} else if ((targetInput[0] as HTMLInputElement).value) {
 					return name;
-                }
-                return;
+				}
+				return;
 			});
 			this.remaining = this.total - remainingNames.length;
             this.writeInnerHtml(this.remainingEl, this.remaining.toString());
+            
+            if(this.remaining === 0) {
+                this.submit.removeAttribute('disabled');
+            }
 		});
 		return;
 	}

@@ -1,6 +1,8 @@
 # form-required-count
 フォーム内の入力項目総数と必須項目数をカウントする
 
+## デモ
+[デモ](https://42zz.github.io/form-required-count/index.html) 
 
 ## 使い方
 ```

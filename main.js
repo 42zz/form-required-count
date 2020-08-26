@@ -1,24 +1,54 @@
 var reqForm = /** @class */ (function () {
-    function reqForm(target, total, nokori) {
+    function reqForm(target, total, remaining) {
         this.targetNames = [];
-        this.count = 0;
         this.total = 0;
+        this.remaining = 0;
         this.target = document.getElementById(target);
         this.totalEl = document.getElementById(total);
-        this.nokoriEl = document.getElementById(nokori);
+        this.remainingEl = document.getElementById(remaining);
         this.setTargetNames(this.target);
         this.writeInnerHtml(this.totalEl, this.total.toString());
-        console.log(this.total);
-        this.count = this.target.length;
+        this.writeInnerHtml(this.remainingEl, this.total.toString());
+        this.updateRemainingCount();
     }
+    // 対象となる項目のnameを取得する
     reqForm.prototype.setTargetNames = function (target) {
         var elements = target.elements;
         for (var i = 0; i < target.elements.length; i++) {
-            if (this.targetNames.indexOf(elements[i].getAttribute('name')) === -1 && elements[i].getAttribute('name') !== null) {
+            if (this.targetNames.indexOf(elements[i].getAttribute('name')) === -1 && elements[i].getAttribute('name') && elements[i].getAttribute('type') !== 'submit') {
                 this.targetNames.push(elements[i].getAttribute('name'));
                 this.total++;
             }
         }
+        return;
+    };
+    reqForm.prototype.updateRemainingCount = function () {
+        var _this = this;
+        var elements = [];
+        for (var i = 0; i < this.targetNames.length; i++) {
+            elements.push(document.getElementsByName(this.targetNames[i])[0]);
+        }
+        document.addEventListener('change', function (_) {
+            // const target: HTMLInputElement = e.target as HTMLInputElement;
+            var remainingNames = _this.targetNames.filter(function (name) {
+                var targetInput = document.getElementsByName(name);
+                if (targetInput[0].getAttribute('type') === 'radio') {
+                    var radio = Array.from(document.querySelectorAll("input[name=" + name + "]"));
+                    for (var _i = 0, radio_1 = radio; _i < radio_1.length; _i++) {
+                        var item = radio_1[_i];
+                        if (item.checked) {
+                            return item.name;
+                        }
+                    }
+                }
+                else if (targetInput[0].value) {
+                    return name;
+                }
+                return;
+            });
+            _this.remaining = _this.total - remainingNames.length;
+            _this.writeInnerHtml(_this.remainingEl, _this.remaining.toString());
+        });
         return;
     };
     reqForm.prototype.writeInnerHtml = function (targetHtml, writeContent) {
@@ -27,4 +57,3 @@ var reqForm = /** @class */ (function () {
     };
     return reqForm;
 }());
-var formInit = new reqForm('remaining-target', 'total', 'nokori');

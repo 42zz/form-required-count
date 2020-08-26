@@ -71,11 +71,11 @@
 	<body>
 		<div class="wrapper">
             <div class="nokori">
-                <h3>残り必須項目数：<span id="nokori">0</span>件</h3>
+                <h3>残り必須項目数：<span id="remaining">0</span>件</h3>
                 <h3>全体必須項目数：<span id="total">0</span>件</h3>
             </div>
 
-			<form id="remaining-target">
+			<form id="target">
 				<dl>
 					<dt>お名前</dt>
 					<dd>
@@ -113,6 +113,14 @@
 							<option value="2">選択項目5</option>
 						</select>
 					</dd>
+                </dl>
+                <dl>
+					<dt>興味・関心</dt>
+					<dd class="form-radio-wrapper">
+						<label for="checkbox-1"><input class="form-radio" id="checkbox-1" type="checkbox" name="your-interest" value="sports"/>スポーツ</label>
+						<label for="checkbox-2"><input class="form-radio" id="checkbox-2" type="checkbox" name="your-interest" value="economy" />経済</label>
+						<label for="checkbox-3"><input class="form-radio" id="checkbox-3" type="checkbox" name="your-interest" value="政治" />政治</label>
+					</dd>
 				</dl>
 				<dl>
 					<dt>お問い合わせ内容</dt>
@@ -125,5 +133,8 @@
         </div>
         
         <script src="main.js"></script>
+        <script>
+            const formInit = new reqForm('target', 'total', 'remaining');
+        </script>
 	</body>
 </html>
